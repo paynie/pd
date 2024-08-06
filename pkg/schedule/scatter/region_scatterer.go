@@ -401,7 +401,7 @@ func (r *RegionScatterer) scatterRegion(region *core.RegionInfo, group string, s
 		r.Put(targetPeers, targetLeader, group)
 		op.SetAdditionalInfo("group", group)
 		op.SetAdditionalInfo("leader-picked-count", strconv.FormatUint(leaderStorePickedCount, 10))
-		op.SetPriorityLevel(constant.High)
+		op.SetPriorityLevel(constant.Urgent)
 	}
 	return op, nil
 }

@@ -473,6 +473,7 @@ func (oc *Controller) checkAddOperator(isPromoting bool, ops ...*Operator) (bool
 	var reason CancelReasonType
 	for _, op := range ops {
 		if op.CheckExpired() {
+			log.Error("Paynie add op.CheckExpired()")
 			reason = Expired
 			operatorCounter.WithLabelValues(op.Desc(), "expired").Inc()
 		}
@@ -969,6 +970,7 @@ func (oc *Controller) ExceedStoreLimit(ops ...*Operator) bool {
 			}
 			if !limiter.Available(stepCost, v, ops[0].GetPriorityLevel()) {
 				OperatorExceededStoreLimitCounter.WithLabelValues(desc).Inc()
+				log.Info("Paynie add, in exceedStoreLimitLocked, exceed store limit")
 				return true
 			}
 		}
